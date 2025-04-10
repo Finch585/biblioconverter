@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор ссылок по ГОСТ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container my-4">
+        <h1 class="text-center mb-1">Генератор ссылок по ГОСТ</h1>
+        <h6 class="text-center mb-4">ГОСТ Р 7.0.5-2008 «Библиографическая ссылка»</h6>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="auto">Автоматически</div>
+            <div class="tab" data-tab="manual">Ручной ввод</div>
+            <div class="tab" data-tab="website">Веб-страницы</div>
+        </div>
+        
+        <div id="autoTab" class="tab-content active">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="citation-input">Введите цитату для конвертации:</label>
+                        <textarea class="form-control" id="citation-input" rows="5" placeholder="Введите цитату в любом формате (APA, Harvard, GOST, Chicago, MLA) или DOI"></textarea>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button id="convert-button" class="convert-button">Конвертировать в ГОСТ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="manualTab" class="tab-content">
+            <div class="notice" id="semiAutoNotice" style="display: none;">
+                <strong>Полуавтоматический режим:</strong> Мы нашли информацию из вашей цитаты.
+                Пожалуйста, проверьте и дополните недостающие поля, затем нажмите "Сгенерировать ссылку".
+            </div>
+            
+            <div>
+                <div class="input-group">
+                    <label for="sourceType">Тип источника:</label>
+                    <select id="sourceType">
+                        <option value="journal">Статья в журнале</option>
+                        <option value="book">Книга</option>
+                        <option value="conference">Материалы конференции</option>
+                        <option value="dissertation">Диссертация</option>
+                    </select>
+                </div>
+                
+                <div id="dynamicForm">
+                    <!-- Сюда будут добавлены поля в зависимости от выбранного типа источника -->
+                </div>
+                
+                <div class="text-center">
+                    <button id="generateBtn" class="convert-button">Сгенерировать ссылку</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="websiteTab" class="tab-content">
+            <div>
+                <div class="input-group">
+                    <label for="website-url">URL веб-страницы:</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="website-url" placeholder="https://example.com/page" style="flex: 1;">
+                        <button id="parseWebsiteBtn" class="copy-button" style="height: 46px; margin-top: 0;">Извлечь данные</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="website-title">Название страницы:</label>
+                    <input type="text" id="website-title" placeholder="Название веб-страницы">
+                </div>
+                
+                <div class="input-group">
+                    <label for="website-author">Автор (если известен):</label>
+                    <input type="text" id="website-author" placeholder="Фамилия И.О.">
+                </div>
+                
+                <div class="input-group">
+                    <label for="website-sitename">Название сайта:</label>
+                    <input type="text" id="website-sitename" placeholder="Название сайта">
+                </div>
+                
+                <div class="input-group">
+                    <label for="website-date">Дата публикации (если известна):</label>
+                    <input type="text" id="website-date" placeholder="ДД.ММ.ГГГГ">
+                </div>
+                
+                <div class="input-group">
+                    <label for="website-accessDate">Дата обращения:</label>
+                    <input type="text" id="website-accessDate" placeholder="ДД.ММ.ГГГГ">
+                </div>
+                
+                <div class="text-center">
+                    <button id="generateWebsiteBtn" class="convert-button">Сгенерировать ссылку</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="error-message" class="error mt-3"></div>
+        
+        <div id="result-section" class="mt-4" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Результат:</h4>
+                    <div id="result" class="p-3 border rounded"></div>
+                    <button id="copy-button" class="btn btn-success btn-sm mt-2">Копировать в буфер обмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Подключаем JavaScript файл -->
+    <script src="script.js"></script>
+</body>
+</html> 
